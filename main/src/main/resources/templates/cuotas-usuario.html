@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cuotas del Usuario</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6">
+            <!-- Datos del Usuario -->
+            <h2>Datos del Usuario</h2>
+            <p><strong>Nombres:</strong> <span th:text="${usuario.nombres}"></span></p>
+            <p><strong>RUT:</strong> <span th:text="${usuario.rut}"></span></p>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <!-- Lista de Cuotas -->
+            <h2>Cuotas</h2>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Número de Cuota</th>
+                    <th>Monto</th>
+                    <th>Fecha de Pago</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- Iterar sobre las cuotas -->
+                <tr th:each="cuota : ${cuotas}">
+                    <td th:text="${cuota.nro_cuota}"></td>
+                    <td th:text="${cuota.monto}"></td>
+                    <td th:text="${cuota.fechaPago}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

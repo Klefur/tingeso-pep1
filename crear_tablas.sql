@@ -60,3 +60,9 @@ create table if not exists nota(
 		foreign key(id_usuario)
 			references usuario(id)
 );
+
+create table if not exists interes(
+	id serial primary key,
+	meses_atraso int not null,
+	interes smallint not null
+);

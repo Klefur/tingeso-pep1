@@ -1,5 +1,6 @@
 package com.main.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -21,6 +22,7 @@ public class TipoColegio {
     @Setter @Getter private int dcto;
 
     @OneToMany(mappedBy = "tipo_colegio")
+    @JsonIgnore
     @Setter @Getter private List<Usuario> usuarios;
 
 }
