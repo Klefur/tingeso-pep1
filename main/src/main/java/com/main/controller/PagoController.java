@@ -21,7 +21,27 @@ public class PagoController {
     UsuarioService userServ;
 
     @GetMapping("/{userId}")
-    public String getUserPay(@PathVariable Long userId, Model model) {
+    public String registrarCuotas(@PathVariable Long userId, Model model) {
+        Usuario user = userServ.show(userId);
+        Pago cuotasForm = new Pago();
+
+        model.addAttribute("estudiante", user);
+        model.addAttribute("cuotasForm", cuotasForm);
+
+        return "generar-cuota";
+    }
+
+    @PostMapping("/{userId}")
+    public String generarCuotas(@ModelAttribute("cuotasForm") Pago cuotasForm, @PathVariable Long userId) {
+        cuotasForm.setTotal(1000000);
+        System.out.println(cuotasForm);
+        pagServ.generarCuotas(cuotasForm, userId);
+
+        return "redirect:/pago/ver-cuotas/" + userId;
+    }
+
+    @GetMapping("/ver-cuotas/{userId}")
+    public String cuotasUsuario(@PathVariable Long userId, Model model) {
         Usuario user = userServ.show(userId);
 
         List<Pago> cuotas = pagServ.getALlByUser(user);

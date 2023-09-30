@@ -32,8 +32,8 @@
                 <!-- Iterar sobre las cuotas -->
                 <tr th:each="cuota : ${cuotas}">
                     <td th:text="${cuota.nro_cuota}"></td>
-                    <td th:text="${cuota.monto}"></td>
-                    <td th:text="${cuota.fechaPago}"></td>
+                    <td th:text="${cuota.total}"></td>
+                    <td th:text="${cuota.fecha_plazo}"></td>
                 </tr>
                 </tbody>
             </table>
