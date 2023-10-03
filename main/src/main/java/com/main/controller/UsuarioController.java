@@ -1,7 +1,5 @@
 package com.main.controller;
 
-
-import com.main.model.TipoColegio;
 import com.main.model.Usuario;
 import com.main.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +10,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 

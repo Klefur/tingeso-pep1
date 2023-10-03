@@ -17,16 +17,13 @@ import java.util.List;
 public class PagoController {
     @Autowired
     PagoService pagServ;
-    @Autowired
-    UsuarioService userServ;
 
     @GetMapping("/{userId}")
     public String registrarCuotas(@PathVariable Long userId, Model model) {
-        Usuario user = userServ.show(userId);
-        Pago cuotasForm = new Pago();
+        Usuario user = pagServ.getUsuarioById(userId);
 
         model.addAttribute("estudiante", user);
-        model.addAttribute("cuotasForm", cuotasForm);
+        model.addAttribute("cuotasForm", new Pago());
 
         return "generar-cuota";
     }
@@ -42,10 +39,15 @@ public class PagoController {
 
     @GetMapping("/ver-cuotas/{userId}")
     public String cuotasUsuario(@PathVariable Long userId, Model model) {
-        Usuario user = userServ.show(userId);
+        Usuario user = pagServ.getUsuarioById(userId);
 
         List<Pago> cuotas = pagServ.getALlByUser(user);
+        List<Integer> descuentos = pagServ.getDescuentos(cuotas);
+        List<Integer> interes = pagServ.getInteres(cuotas);
+
         model.addAttribute("cuotas", cuotas);
+        model.addAttribute("interes", interes);
+        model.addAttribute("descuento", descuentos);
         model.addAttribute("usuario", user);
 
         return "cuotas-usuario";

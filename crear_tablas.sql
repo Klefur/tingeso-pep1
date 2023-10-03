@@ -25,18 +25,6 @@ create table if not exists usuario(
 			references tipo_colegio(id)
 );
 
-create table if not exists dcto_egreso(
-	id serial primary key,
-	dcto int not null,
-	tiempo_egreso int not null
-);
-
-create table if not exists dcto_cuota(
-	id serial primary key,
-	dcto int not null,
-	puntaje_prom int not null
-);
-
 create table if not exists pago(
 	id serial primary key,
 	total int not null,
@@ -61,8 +49,11 @@ create table if not exists nota(
 			references usuario(id)
 );
 
-create table if not exists interes(
-	id serial primary key,
-	meses_atraso int not null,
-	interes smallint not null
-);
+insert into tipo_colegio (id, nombre, max_cuotas, dcto) values
+(1, 'Publico', 10, 20),
+(2, 'Privado', 4, 0),
+(3, 'Subvencionado', 7, 10);
+
+insert into precio (id, nombre, precio) values
+(1, 'Arancel', 1500000),
+(2, 'Matricula', 70000);

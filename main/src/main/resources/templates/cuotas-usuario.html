@@ -25,15 +25,26 @@
                 <tr>
                     <th>Número de Cuota</th>
                     <th>Monto</th>
+                    <th>Descuento total</th>
+                    <th>Interes</th>
                     <th>Fecha de Pago</th>
+                    <th>Fecha de vencimiento</th>
+                    <th>Estado pago</th>
                 </tr>
                 </thead>
                 <tbody>
                 <!-- Iterar sobre las cuotas -->
-                <tr th:each="cuota : ${cuotas}">
-                    <td th:text="${cuota.nro_cuota}"></td>
-                    <td th:text="${cuota.total}"></td>
-                    <td th:text="${cuota.fecha_plazo}"></td>
+                <tr th:each="index : ${#numbers.sequence(0, #lists.size(cuotas)-1)}">
+                    <td th:text="${cuotas[index].nro_cuota}"></td>
+                    <td th:text="${cuotas[index].total}"></td>
+                    <td th:text="${descuento[index]}"></td>
+                    <td th:text="${interes[index]}"></td>
+                    <td th:text="${cuotas[index].fecha_pago}"></td>
+                    <td th:text="${cuotas[index].fecha_plazo}"></td>
+                    <td>
+                        <span th:if="${cuotas[index].pagado}">Pagado</span>
+                        <span th:unless="${cuotas[index].pagado}">No Pagado</span>
+                    </td>
                 </tr>
                 </tbody>
             </table>
