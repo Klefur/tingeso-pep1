@@ -15,7 +15,7 @@
             <p><strong>RUT:</strong> <span th:text="${usuario.rut}"></span></p>
         </div>
     </div>
-
+    <a th:href="@{/pago/{id}(id=${usuario.id})}" class="btn btn-secondary mt-2">Generar cuotas</a>
     <div class="row mt-4">
         <div class="col-md-12">
             <!-- Lista de Cuotas -->
@@ -30,26 +30,34 @@
                     <th>Fecha de Pago</th>
                     <th>Fecha de vencimiento</th>
                     <th>Estado pago</th>
+                    <th>Acción</th>
                 </tr>
                 </thead>
                 <tbody>
                 <!-- Iterar sobre las cuotas -->
-                <tr th:each="index : ${#numbers.sequence(0, #lists.size(cuotas)-1)}">
+                <tr th:if="${!cuotas.isEmpty()}" th:each="index : ${#numbers.sequence(0, #lists.size(cuotas)-1)}">
                     <td th:text="${cuotas[index].nro_cuota}"></td>
                     <td th:text="${cuotas[index].total}"></td>
                     <td th:text="${descuento[index]}"></td>
                     <td th:text="${interes[index]}"></td>
-                    <td th:text="${cuotas[index].fecha_pago}"></td>
-                    <td th:text="${cuotas[index].fecha_plazo}"></td>
+                    <td th:text="${#dates.format(cuotas[index].fecha_pago, 'dd/MM/yyyy')}"></td>
+                    <td th:text="${#dates.format(cuotas[index].fecha_plazo, 'dd/MM/yyyy')}"></td>
                     <td>
                         <span th:if="${cuotas[index].pagado}">Pagado</span>
                         <span th:unless="${cuotas[index].pagado}">No Pagado</span>
+                    </td>
+                    <td>
+                        <form method="post" action="/pago/pagar-cuota">
+                            <input type="hidden" name="cuotaId" th:value="${cuotas[index].id}" />
+                            <button type="submit">Pagar</button>
+                        </form>
                     </td>
                 </tr>
                 </tbody>
             </table>
         </div>
     </div>
+    <a href="/usuario" class="btn btn-secondary mt-2">Volver a la lista de usuarios</a>
 </div>
 </body>
 </html>

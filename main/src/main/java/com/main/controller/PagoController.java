@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Calendar;
 import java.util.List;
 
 @Controller
@@ -51,5 +52,12 @@ public class PagoController {
         model.addAttribute("usuario", user);
 
         return "cuotas-usuario";
+    }
+
+    @PostMapping("/pagar-cuota")
+    public String pagarCuota(@RequestParam("cuotaId") Long cuotaId) {
+        Long uId = pagServ.pagarCuota(cuotaId);
+
+        return "redirect:/pago/ver-cuotas/" + uId;
     }
 }

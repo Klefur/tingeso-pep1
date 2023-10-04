@@ -20,27 +20,32 @@ public class PagoService {
     UsuarioService uServ;
     Descuento descuentos;
     Interes intereses;
+    final Integer arancel = 1500000;
 
     public Usuario getUsuarioById(Long id) {
         return uServ.show(id);
     }
 
     public void generarCuotas(Pago cuotasForm, Long userId) {
-        Integer total = cuotasForm.getTotal() / cuotasForm.getNro_cuota();
+        Integer total = arancel / cuotasForm.getNro_cuota();
         Usuario user = uServ.show(userId);
         descuentos = new Descuento();
 
         Integer dcto_correspondido = 0;
-        Calendar calendar = Calendar.getInstance();
 
-        for (List<Integer> dcto : descuentos.descuento_egreso) {
-            if (calendar.get(Calendar.YEAR) - user.getGrad_year() <= dcto.get(0)) {
-                dcto_correspondido += dcto.get(1);
-                break;
+        if (cuotasForm.getNro_cuota() == 1) {
+            dcto_correspondido = 50;
+        } else {
+            Calendar calendar = Calendar.getInstance();
+
+            for (List<Integer> dcto : descuentos.descuento_egreso) {
+                if (calendar.get(Calendar.YEAR) - user.getGrad_year() <= dcto.get(0)) {
+                    dcto_correspondido += dcto.get(1);
+                    break;
+                }
             }
+            dcto_correspondido += user.getTipo_colegio().getDcto();
         }
-
-        dcto_correspondido += user.getTipo_colegio().getDcto();
 
         List<Date> fechas = generarFechasDeVencimiento(cuotasForm.getNro_cuota());
 
@@ -57,7 +62,13 @@ public class PagoService {
     }
 
     public List<Pago> getALlByUser(Usuario user) {
-        return pagoRep.findAllByUsuario(user);
+        List<Pago> cuotas = pagoRep.findAllByUsuario(user);
+        Calendar calendar = Calendar.getInstance();
+
+        if (calendar.get(Calendar.DAY_OF_MONTH) < 5 && calendar.get(Calendar.DAY_OF_MONTH) > 10) {
+            cuotas = calcularInteres(cuotas);
+        }
+        return cuotas;
     }
 
     public Pago show(Long id) {
@@ -66,6 +77,48 @@ public class PagoService {
         } catch (Exception e) {
             return null;
         }
+    }
+
+    public Long pagarCuota(Long id) {
+        Calendar calendar = Calendar.getInstance();
+        Pago temp = show(id);
+
+        if (calendar.get(Calendar.DAY_OF_MONTH) > 5 && calendar.get(Calendar.DAY_OF_MONTH) < 10) {
+            Date fechaPago = calendar.getTime();
+            temp.setFecha_pago(fechaPago);
+            temp.setPagado(Boolean.TRUE);
+            System.out.println(temp.getPagado());
+            System.out.println(temp.getFecha_pago());
+            pagoRep.save(temp);
+        }
+
+        return temp.getUsuario().getId();
+    }
+
+    private List<Pago> calcularInteres(List<Pago> cuotas) {
+        Integer interes_acumulado = 0;
+        Calendar calendar = Calendar.getInstance();
+        Calendar fecha = Calendar.getInstance();
+
+        for ( Pago cuota : cuotas ) {
+            fecha.setTime(cuota.getFecha_plazo());
+            Integer diferencia_meses = calendar.get(Calendar.MONTH) - fecha.get(Calendar.MONTH);
+            for (List<Integer> interes : intereses.interes) {
+                if (interes.get(0) >= diferencia_meses && !cuota.getPagado()) {
+                    interes_acumulado += interes.get(1);
+                    break;
+                }
+            }
+        }
+
+        for ( Pago cuota : cuotas ) {
+            if (!cuota.getPagado()) {
+                cuota.setInteres_acumulado(interes_acumulado);
+                pagoRep.save(cuota);
+            }
+        }
+
+        return cuotas;
     }
 
     public Pago update(Pago newPago, Long id) {
@@ -95,8 +148,6 @@ public class PagoService {
         calendar.add(Calendar.MONTH, 1);
 
         for (int i = 0; i < n; i++) {
-            // Establecer el día actual
-            int diaActual = calendar.get(Calendar.DAY_OF_MONTH);
 
             // Establecer la fecha al día 10 del mes
             calendar.set(Calendar.DAY_OF_MONTH, 10);
