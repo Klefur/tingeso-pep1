@@ -15,7 +15,7 @@ import java.util.Date;
 public class Pago {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter
+    @Setter @Getter
     private Long id;
 
     @Setter @Getter private Integer total;

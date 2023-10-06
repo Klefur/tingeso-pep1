@@ -83,7 +83,7 @@ public class PagoService {
         Calendar calendar = Calendar.getInstance();
         Pago temp = show(id);
 
-        if (calendar.get(Calendar.DAY_OF_MONTH) > 5 && calendar.get(Calendar.DAY_OF_MONTH) < 10) {
+        if (calendar.get(Calendar.DAY_OF_MONTH) >= 5 && calendar.get(Calendar.DAY_OF_MONTH) <= 10) {
             Date fechaPago = calendar.getTime();
             temp.setFecha_pago(fechaPago);
             temp.setPagado(Boolean.TRUE);

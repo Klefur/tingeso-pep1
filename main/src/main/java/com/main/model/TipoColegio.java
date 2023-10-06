@@ -14,7 +14,7 @@ import java.util.List;
 public class TipoColegio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter
+    @Setter @Getter
     private Long id;
 
     @Setter @Getter private String nombre;

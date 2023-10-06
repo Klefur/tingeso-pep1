@@ -15,7 +15,7 @@ import java.util.Date;
 public class Nota {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter
+    @Setter @Getter
     private Long id;
 
     @Setter @Getter private int nota;

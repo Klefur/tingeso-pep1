@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - MainApplicationTests</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>MainApplicationTests</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/com.main.html">com.main</a> &gt; MainApplicationTests</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">1</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">0.559s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Tests</a>
+</li>
+<li>
+<a href="#tab1">Standard output</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">contextLoads()</td>
+<td class="success">0.559s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>17:56:18.460 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.main.MainApplicationTests]: MainApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+17:56:18.592 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.main.MainApplication for test class com.main.MainApplicationTests
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.1.3)
+
+2023-10-05T17:56:19.094-03:00  INFO 12285 --- [    Test worker] com.main.MainApplicationTests            : Starting MainApplicationTests using Java 17.0.8.1 with PID 12285 (started by klefur in /home/klefur/Escritorio/Code/tingeso-pep1/main)
+2023-10-05T17:56:19.097-03:00  INFO 12285 --- [    Test worker] com.main.MainApplicationTests            : No active profile set, falling back to 1 default profile: &quot;default&quot;
+2023-10-05T17:56:19.791-03:00  INFO 12285 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-10-05T17:56:19.876-03:00  INFO 12285 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 75 ms. Found 4 JPA repository interfaces.
+2023-10-05T17:56:20.283-03:00  INFO 12285 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-10-05T17:56:20.325-03:00  INFO 12285 --- [    Test worker] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.7.Final
+2023-10-05T17:56:20.327-03:00  INFO 12285 --- [    Test worker] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
+2023-10-05T17:56:20.493-03:00  INFO 12285 --- [    Test worker] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2023-10-05T17:56:20.604-03:00  INFO 12285 --- [    Test worker] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2023-10-05T17:56:20.621-03:00  INFO 12285 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-10-05T17:56:21.161-03:00  INFO 12285 --- [    Test worker] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@30ffb2a6
+2023-10-05T17:56:21.163-03:00  INFO 12285 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-10-05T17:56:21.483-03:00  INFO 12285 --- [    Test worker] o.h.b.i.BytecodeProviderInitiator        : HHH000021: Bytecode provider name : bytebuddy
+2023-10-05T17:56:22.321-03:00  INFO 12285 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+Hibernate: alter table if exists nota drop constraint if exists FKomm3w5vqwft0ri4ls56hk6tvj
+Hibernate: alter table if exists pago drop constraint if exists FKo7iaqgbbd954xkdo7n1pd6qr7
+Hibernate: alter table if exists usuario drop constraint if exists FKhur2mf3v2jqpoidvabokrtftx
+Hibernate: drop table if exists nota cascade
+Hibernate: drop table if exists pago cascade
+Hibernate: drop table if exists tipo_colegio cascade
+Hibernate: drop table if exists usuario cascade
+Hibernate: create table nota (nota integer not null, fecha timestamp(6), id bigserial not null, id_usuario bigint, primary key (id))
+Hibernate: create table pago (atrasado boolean, dcto_aplicable integer, interes_acumulado integer, nro_cuota integer, pagado boolean, total integer, fecha_pago timestamp(6), fecha_plazo timestamp(6), id bigserial not null, id_usuario bigint, primary key (id))
+Hibernate: create table tipo_colegio (dcto integer not null, max_cuotas integer not null, id bigserial not null, nombre varchar(255), primary key (id))
+Hibernate: create table usuario (grad_year integer, fecha_nacimiento timestamp(6), id bigserial not null, id_tipo_colegio bigint, apellidos varchar(255), nombre_colegio varchar(255), nombres varchar(255), rut varchar(255), primary key (id))
+Hibernate: alter table if exists nota add constraint FKomm3w5vqwft0ri4ls56hk6tvj foreign key (id_usuario) references usuario
+Hibernate: alter table if exists pago add constraint FKo7iaqgbbd954xkdo7n1pd6qr7 foreign key (id_usuario) references usuario
+Hibernate: alter table if exists usuario add constraint FKhur2mf3v2jqpoidvabokrtftx foreign key (id_tipo_colegio) references tipo_colegio
+2023-10-05T17:56:22.416-03:00  INFO 12285 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-10-05T17:56:23.058-03:00  WARN 12285 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-10-05T17:56:23.263-03:00  INFO 12285 --- [    Test worker] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2023-10-05T17:56:23.626-03:00  INFO 12285 --- [    Test worker] com.main.MainApplicationTests            : Started MainApplicationTests in 4.819 seconds (process running for 6.462)
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 8.2.1</a> at 05-10-2023 17:56:24</p>
+</div>
+</div>
+</body>
+</html>
