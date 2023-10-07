@@ -16,7 +16,7 @@ import java.util.List;
 
 @CrossOrigin
 @Controller
-@RequestMapping("/usuario")
+@RequestMapping()
 public class UsuarioController {
     @Autowired
     UsuarioService uServ;
@@ -42,9 +42,14 @@ public class UsuarioController {
         return "registro";
     }
 
+    @GetMapping("/resumen")
+    public String resumen(Model model) {
+        return "resumen";
+    }
+
     @PostMapping("/guardar_usuario")
     public String guardarUsuario(@ModelAttribute("usuario") Usuario usuario, @RequestParam("tipo_colegio") Long idTipoColegio) {
         uServ.crear(usuario, idTipoColegio);
-        return "redirect:/usuario"; // Redirige de nuevo a la lista de usuarios
+        return "redirect:/"; // Redirige de nuevo a la lista de usuarios
     }
 }
