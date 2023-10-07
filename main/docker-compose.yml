@@ -1,6 +1,18 @@
 version: '3.8'
 
 services:
+  nginx:
+    image: nginx:latest
+    container_name: nginx-proxy
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+    depends_on:
+      - topeducation1
+      - topeducation2
+
   postgres:
     image: postgres:latest
     container_name: postgres_container
@@ -11,15 +23,38 @@ services:
     ports:
       - "5056:5432"
 
-  java-app:
-    build:
-      context: .  # Directorio que contiene tu aplicación Java (Dockerfile)
-      dockerfile: Dockerfile
+  topeducation1:
+    container_name: project-topeducation1
+    image: klefurusach/tingeso-pep1
+    ports:
+      - "8086:8086"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/top_education
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=1234
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=create
+      - SPRING_JPA_DEFER_DATASOURCE_INITIALIZATION=true
+      - SPRING_SQL_INIT_MODE=always
+    deploy:
+      restart_policy:
+        condition: on-failure
     depends_on:
       - postgres
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres_container:5432/top_education
-      SPRING_DATASOURCE_USERNAME: postgres
-      SPRING_DATASOURCE_PASSWORD: 1234
+
+  topeducation2:
+    container_name: project-topeducation2
+    image: klefurusach/tingeso-pep1
     ports:
-      - "8086:8086"  # Mapear el puerto 8080 de la aplicación Java al host
+      - "8087:8086"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/top_education
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=1234
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=create
+      - SPRING_JPA_DEFER_DATASOURCE_INITIALIZATION=true
+      - SPRING_SQL_INIT_MODE=always
+    deploy:
+      restart_policy:
+        condition: on-failure
+    depends_on:
+      - postgres
