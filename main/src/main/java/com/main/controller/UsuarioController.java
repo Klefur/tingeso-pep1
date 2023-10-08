@@ -48,7 +48,7 @@ public class UsuarioController {
     }
 
     @PostMapping("/guardar_usuario")
-    public String guardarUsuario(@ModelAttribute("usuario") Usuario usuario, @RequestParam("tipo_colegio") Long idTipoColegio) {
+    public String guardarUsuario(@ModelAttribute("usuario") Usuario usuario, @RequestParam("id_tipo_colegio") Long idTipoColegio) {
         uServ.crear(usuario, idTipoColegio);
         return "redirect:/"; // Redirige de nuevo a la lista de usuarios
     }

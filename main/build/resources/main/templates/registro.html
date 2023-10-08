@@ -9,7 +9,7 @@
 <body>
 <div class="container">
   <h1>Registro de Usuario</h1>
-  <form method="post" th:object="${usuario}" action="/usuario/guardar_usuario">
+  <form method="post" th:object="${usuario}" action="/guardar_usuario">
     <div class="form-group">
       <label for="nombres">Nombres</label>
       <input type="text" class="form-control" id="nombres" th:field="*{nombres}" required>
@@ -35,8 +35,8 @@
       <input type="number" class="form-control" id="grad_year" th:field="*{grad_year}" required>
     </div>
     <div class="form-group">
-      <label for="tipo_colegio">Tipo de Colegio</label>
-      <select class="form-control" id="tipo_colegio" th:field="*{tipo_colegio}" required>
+      <label for="id_tipo_colegio">Tipo de Colegio</label>
+      <select class="form-control" id="id_tipo_colegio" name="id_tipo_colegio" required>
         <option value="1">Público</option>
         <option value="2">Privado</option>
         <option value="3">Subvencionado</option>
@@ -44,7 +44,7 @@
     </div>
     <button type="submit" class="btn btn-primary">Guardar</button>
   </form>
-  <a href="/usuario" class="btn btn-secondary mt-2">Volver a la lista de usuarios</a>
+  <a href="/" class="btn btn-secondary mt-2">Volver a la lista de usuarios</a>
 </div>
 </body>
 </html>
