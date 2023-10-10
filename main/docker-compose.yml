@@ -21,13 +21,13 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 1234
     ports:
-      - "5056:5432"
+      - "5432:5432"
 
   topeducation1:
     container_name: project-topeducation1
     image: klefurusach/tingeso-pep1
     ports:
-      - "8086:8086"
+      - "8087:8086"
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/top_education
       - SPRING_DATASOURCE_USERNAME=postgres
@@ -43,7 +43,7 @@ services:
     container_name: project-topeducation2
     image: klefurusach/tingeso-pep1
     ports:
-      - "8087:8086"
+      - "8088:8086"
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/top_education
       - SPRING_DATASOURCE_USERNAME=postgres
