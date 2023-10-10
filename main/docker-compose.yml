@@ -24,7 +24,7 @@ services:
       - "5432:5432"
 
   topeducation1:
-    container_name: project-topeducation1
+    container_name: topeducation1
     image: klefurusach/tingeso-pep1
     ports:
       - "8090:8090"
@@ -40,7 +40,7 @@ services:
       - postgres
 
   topeducation2:
-    container_name: project-topeducation2
+    container_name: topeducation2
     image: klefurusach/tingeso-pep1
     ports:
       - "8091:8090"
