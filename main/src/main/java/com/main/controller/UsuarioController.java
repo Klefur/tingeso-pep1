@@ -10,7 +10,6 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -42,8 +41,11 @@ public class UsuarioController {
         return "registro";
     }
 
-    @GetMapping("/resumen")
-    public String resumen(Model model) {
+    @GetMapping("/resumen/{id}")
+    public String resumen(Model model, @PathVariable Long id) {
+
+
+        model.addAttribute("estudiante", uServ.show(id));
         return "resumen";
     }
 

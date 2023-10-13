@@ -32,25 +32,9 @@ public class UsuarioService {
         }
     }
 
-    public Usuario update(Usuario newU, Long id) {
-        Usuario temp;
+    public Usuario findByRut(String rut) {
         try {
-            temp = show(id);
-
-            if ( newU.getNombres() != null ) {
-                temp.setNombres(newU.getNombres());
-            }
-
-            if ( newU.getApellidos() != null ) {
-                temp.setApellidos(newU.getApellidos());
-            }
-
-            if ( newU.getGrad_year() != null ) {
-                temp.setGrad_year(newU.getGrad_year());
-            }
-
-            return userRep.save(temp);
-
+            return userRep.findByRut(rut).get();
         } catch (Exception e) {
             return null;
         }

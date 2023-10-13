@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface PagoRepository extends JpaRepository<Pago, Long> {
-    public List<Pago> findAllByUsuario(Usuario usuario);
+    List<Pago> findAllByUsuario(Usuario usuario);
 }

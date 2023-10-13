@@ -1,10 +1,7 @@
 package com.main.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Date;
 
@@ -22,8 +19,8 @@ public class Pago {
     @Setter @Getter private Integer nro_cuota;
     @Setter @Getter private Date fecha_plazo;
     @Setter @Getter private Date fecha_pago;
-    @Setter @Getter private Boolean pagado;
-    @Setter @Getter private Boolean atrasado;
+    @Setter @Getter private Boolean pagado = Boolean.FALSE;
+    @Setter @Getter private Boolean atrasado = Boolean.FALSE;
     @Setter @Getter private Integer dcto_aplicable;
     @Setter @Getter private Integer interes_acumulado;
 

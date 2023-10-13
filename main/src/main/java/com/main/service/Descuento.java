@@ -7,8 +7,6 @@ public class Descuento {
     public List<List<Integer>> descuento_egreso;
     public List<List<Integer>> descuento_nota;
 
-    public Integer descuento_contado = 50;
-
     Descuento () {
         descuento_egreso = new ArrayList<>();
         descuento_egreso.add(new ArrayList<>());
@@ -31,9 +29,6 @@ public class Descuento {
         descuento_nota.add(new ArrayList<>());
         descuento_nota.get(2).add(850);
         descuento_nota.get(2).add(2);
-        descuento_nota.add(new ArrayList<>());
-        descuento_nota.get(3).add(849);
-        descuento_nota.get(3).add(0);
     }
 
 }

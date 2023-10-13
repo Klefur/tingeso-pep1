@@ -1,5 +1,6 @@
 package com.main.service;
 
+import com.main.model.Nota;
 import com.main.model.Pago;
 import com.main.model.Usuario;
 import com.main.repository.PagoRepository;
@@ -18,6 +19,8 @@ public class PagoService {
     PagoRepository pagoRep;
     @Autowired
     UsuarioService uServ;
+    @Autowired
+    NotaService notaServ;
     Descuento descuentos;
     Interes intereses;
     final Integer arancel = 1500000;
@@ -79,6 +82,33 @@ public class PagoService {
         }
     }
 
+    public void dctoNotas(List<String> ruts) {
+        List<Pago> cuotas;
+        Descuento descuento = new Descuento();
+        for (String rut: ruts) {
+            Integer dcto = 0;
+            Usuario user = uServ.findByRut(rut);
+            double promedio = notaServ.promedioGeneralNotas(user.getId());
+            for (List<Integer> dctoNota : descuento.descuento_nota) {
+                if ( promedio >= dctoNota.get(0)) {
+                    dcto += dctoNota.get(1);
+                    break;
+                }
+            }
+
+            if (dcto != 0) {
+                cuotas = pagoRep.findAllByUsuario(user);
+                for (Pago cuota : cuotas) {
+                    if (!cuota.getPagado()) {
+                        cuota.setDcto_aplicable(cuota.getDcto_aplicable() + dcto);
+                        pagoRep.save(cuota);
+                    }
+                }
+            }
+
+        }
+    }
+
     public Long pagarCuota(Long id) {
         Calendar calendar = Calendar.getInstance();
         Pago temp = show(id);
@@ -119,18 +149,6 @@ public class PagoService {
         }
 
         return cuotas;
-    }
-
-    public Pago update(Pago newPago, Long id) {
-        Pago temp;
-        try {
-            temp = show(id);
-
-            return pagoRep.save(temp);
-
-        } catch (Exception e) {
-            return null;
-        }
     }
 
     public String delete(Long id) {

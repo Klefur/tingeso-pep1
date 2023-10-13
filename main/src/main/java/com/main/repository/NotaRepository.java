@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface NotaRepository extends JpaRepository<Nota, Long> {
-    public List<Nota> findAllByUsuario(Usuario user);
+    List<Nota> findAllByUsuario(Usuario user);
 }

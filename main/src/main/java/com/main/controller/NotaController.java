@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -19,12 +20,13 @@ public class NotaController {
     NotaService notaServ;
 
     @GetMapping()
-    public String subirNotas(Model model) {
+    public String subirNotas() {
         return "subir-notas";
     }
 
     @PostMapping()
-    public String guardarNotas() {
+    public String guardarNotas(@RequestParam("csvFile") MultipartFile csvFile) {
+        notaServ.leerCSV(csvFile);
         return "redirect:/";
     }
 }
