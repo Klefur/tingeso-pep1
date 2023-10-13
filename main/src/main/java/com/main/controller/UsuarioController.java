@@ -50,7 +50,7 @@ public class UsuarioController {
         model.addAttribute("montoArancelBase", 1500000);
         model.addAttribute("montoArancel", uServ.getMontoArancel(id));
         model.addAttribute("totalCuotas", uServ.cantidadCuotas(id));
-        model.addAttribute("fechaUltimoPago", new Date());
+        model.addAttribute("fechaUltimoPago", uServ.obtenerUltimaFechaDePago(id));
         model.addAttribute("pagadoPagar", uServ.totalPagadoyPagar(id));
         return "resumen";
     }

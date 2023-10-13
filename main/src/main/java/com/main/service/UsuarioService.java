@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -122,5 +123,19 @@ public class UsuarioService {
         cantidades.add(pagar);
 
         return cantidades;
+    }
+
+    public Date obtenerUltimaFechaDePago(Long id) {
+        List<Pago> pagos = pagoServ.getALlByUser(show(id));
+        Date ultimaFecha = null;
+
+        for (Pago pago : pagos) {
+            Date fechaPago = pago.getFecha_pago();
+            if (ultimaFecha == null || fechaPago.after(ultimaFecha)) {
+                ultimaFecha = fechaPago;
+            }
+        }
+
+        return ultimaFecha;
     }
 }
