@@ -117,6 +117,7 @@ public class PagoService {
             Date fechaPago = calendar.getTime();
             temp.setFecha_pago(fechaPago);
             temp.setPagado(Boolean.TRUE);
+            temp.setAtrasado(Boolean.FALSE);
             System.out.println(temp.getPagado());
             System.out.println(temp.getFecha_pago());
             pagoRep.save(temp);

@@ -44,8 +44,14 @@ public class UsuarioController {
     @GetMapping("/resumen/{id}")
     public String resumen(Model model, @PathVariable Long id) {
 
-
         model.addAttribute("estudiante", uServ.show(id));
+        model.addAttribute("numeroExamenes", uServ.getTotalNotas(id));
+        model.addAttribute("promedioPuntaje", uServ.getPromedioNotas(id));
+        model.addAttribute("montoArancelBase", 1500000);
+        model.addAttribute("montoArancel", uServ.getMontoArancel(id));
+        model.addAttribute("totalCuotas", uServ.cantidadCuotas(id));
+        model.addAttribute("fechaUltimoPago", new Date());
+        model.addAttribute("pagadoPagar", uServ.totalPagadoyPagar(id));
         return "resumen";
     }
 

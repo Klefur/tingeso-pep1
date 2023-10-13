@@ -16,6 +16,7 @@
             <th>Nombre del Estudiante</th>
             <th>Nro. Exámenes Rendidos</th>
             <th>Promedio Puntaje Exámenes</th>
+            <th>Monto Total Arancel Base</th>
             <th>Monto Total Arancel a Pagar</th>
             <th>Tipo de Pago</th>
             <th>Nro. Total de Cuotas Pactadas</th>
@@ -30,17 +31,24 @@
         <!-- Itera sobre los datos de los estudiantes y muestra cada fila -->
         <tr>
             <td th:text="${estudiante.rut}"></td>
-            <td th:text="${estudiante.nombres} ${estudiante.apellidos}"></td>
+            <td>
+                <p th:text="${estudiante.nombres}"></p>
+                <p th:text="${estudiante.apellidos}"></p>
+            </td>
             <td th:text="${numeroExamenes}"></td>
             <td th:text="${promedioPuntaje}"></td>
+            <td th:text="${montoArancelBase}"></td>
             <td th:text="${montoArancel}"></td>
-            <td th:text="${tipoPago}"></td>
-            <td th:text="${numCuotasTotal}"></td>
-            <td th:text="${numCuotasPagadas}"></td>
-            <td th:text="${montoTotalPagado}"></td>
-            <td th:text="${fechaUltimoPago}"></td>
-            <td th:text="${saldoPorPagar}"></td>
-            <td th:text="${numCuotasRetraso}"></td>
+            <td>
+                <span th:if="${totalCuotas[0] == 1}">Contado</span>
+                <span th:unless="${totalCuotas[0] == 1}">Cuotas</span>
+            </td>
+            <td th:text="${totalCuotas[0]}"></td>
+            <td th:text="${totalCuotas[1]}"></td>
+            <td th:text="${pagadoPagar[0]}"></td>
+            <td th:text="${#dates.format(fechaUltimoPago, 'dd/MM/yyyy')}"></td>
+            <td th:text="${pagadoPagar[1]}"></td>
+            <td th:text="${totalCuotas[2]}"></td>
         </tr>
         </tbody>
     </table>
