@@ -16,20 +16,22 @@ public class UsuarioTests {
     UsuarioService uServ;
 
     @Test
-    void testGetUsuario() {
-         Usuario user = new Usuario();
+    void testUsuario() {
+        Usuario user = new Usuario();
 
-         Date fecha = new Date();
+        Date fecha = new Date();
 
-         user.setNombres("Valentina");
-         user.setApellidos("Campos");
-         user.setGrad_year(2020);
-         user.setRut("1234567");
-         user.setFecha_nacimiento(fecha);
-         user.setNombre_colegio("College");
-         user = uServ.crear(user, 1L);
-         assertNotNull(uServ.getALl());
-         uServ.delete(user.getId());
+        user.setNombres("Valentina");
+        user.setApellidos("Campos");
+        user.setGrad_year(2020);
+        user.setRut("1234567");
+        user.setFecha_nacimiento(fecha);
+        user.setNombre_colegio("College");
+        user = uServ.crear(user, 1L);
+        assertNotNull(uServ.getALl());
+        assertNotNull(uServ.show(user.getId()));
+        assertNotNull(uServ.findByRut(user.getRut()));
+        uServ.delete(user.getId());
     }
 
 }

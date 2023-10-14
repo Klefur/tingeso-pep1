@@ -1,6 +1,5 @@
 package com.main.service;
 
-import com.main.model.Nota;
 import com.main.model.Pago;
 import com.main.model.TipoColegio;
 import com.main.model.Usuario;
@@ -69,10 +68,10 @@ public class UsuarioService {
         List<Pago> cuotas = pagoServ.getALlByUser(show(id));
         List<Integer> dcto = pagoServ.getDescuentos(cuotas);
         List<Integer> interes = pagoServ.getInteres(cuotas);
-        Integer totalArancel = 0;
+        int totalArancel = 0;
 
         for (int i = 0; i < cuotas.size(); i++) {
-            totalArancel = cuotas.get(i).getTotal() - dcto.get(i) + interes.get(i);
+            totalArancel += cuotas.get(i).getTotal() - dcto.get(i) + interes.get(i);
         }
 
         return totalArancel;
@@ -104,8 +103,8 @@ public class UsuarioService {
 
     public List<Integer> totalPagadoyPagar(Long id) {
         List<Integer> cantidades = new ArrayList<>();
-        Integer pagado = 0;
-        Integer pagar  = 0;
+        int pagado = 0;
+        int pagar  = 0;
         List<Pago> cuotas = pagoServ.getALlByUser(show(id));
         List<Integer> dcto = pagoServ.getDescuentos(cuotas);
         List<Integer> interes = pagoServ.getInteres(cuotas);
