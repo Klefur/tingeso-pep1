@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Date;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -20,7 +21,7 @@ public class PagoTests {
     PagoService pagoServ;
 
     @Test
-    void testGetUsuario() {
+    void testPago() {
         Usuario user = new Usuario();
 
         Date fecha = new Date();
@@ -41,6 +42,7 @@ public class PagoTests {
         assertNotNull(pagoServ.getUsuarioById(user.getId()));
         assertNotNull(pagoServ.getALlByUser(user));
         assertNotNull(pagoServ.pagarCuota(1L));
+        assertNotNull(pagoServ.calcularInteres(pagoServ.getALlByUser(user)));
         assertNotNull(pagoServ.getInteres(pagoServ.getALlByUser(user)));
         assertNotNull(pagoServ.getDescuentos(pagoServ.getALlByUser(user)));
         pagoServ.delete(1L);

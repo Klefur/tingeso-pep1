@@ -60,6 +60,10 @@ public class PagoService {
             cuota.setFecha_plazo(fechas.get(i - 1));
             cuota.setInteres_acumulado(0);
             cuota.setDcto_aplicable(dcto_correspondido);
+            if (cuotasForm.getNro_cuota() == 1) {
+                cuota.setPagado(true);
+                cuota.setFecha_pago(new Date());
+            }
             pagoRep.save(cuota);
         }
     }
@@ -126,10 +130,11 @@ public class PagoService {
         return temp.getUsuario().getId();
     }
 
-    private List<Pago> calcularInteres(List<Pago> cuotas) {
+    public List<Pago> calcularInteres(List<Pago> cuotas) {
         Integer interes_acumulado = 0;
         Calendar calendar = Calendar.getInstance();
         Calendar fecha = Calendar.getInstance();
+        intereses = new Interes();
 
         for ( Pago cuota : cuotas ) {
             fecha.setTime(cuota.getFecha_plazo());
