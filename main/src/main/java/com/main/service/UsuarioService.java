@@ -130,8 +130,10 @@ public class UsuarioService {
 
         for (Pago pago : pagos) {
             Date fechaPago = pago.getFecha_pago();
-            if (ultimaFecha == null || fechaPago.after(ultimaFecha)) {
-                ultimaFecha = fechaPago;
+            if (fechaPago != null) {
+                if (ultimaFecha == null || fechaPago.after(ultimaFecha)) {
+                    ultimaFecha = fechaPago;
+                }
             }
         }
 
