@@ -8,14 +8,14 @@ pipeline {
             steps {
                 checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Klefur/tingeso-pep1']])
                 dir("main"){
-                    sh "gradle clean build"
+                    bat "gradle clean build"
                 }
             }
         }
         stage("Test") {
             steps {
                 dir("main"){
-                    sh "gradle test"
+                    bat "gradle test"
                 }
             }
         }        
@@ -23,10 +23,12 @@ pipeline {
             steps {
                 dir("main"){
                     script {
-                        withDockerRegistry(credentialsId: 'docker-credentials') {
-                            sh "docker build -t klefurusach/tingeso-pep1 ."
-                            sh "docker push klefurusach/tingeso-pep1"
+                        withCredentials([usernamePassword(credentialsId: 'docker-credentials', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                            bat 'docker login -u %DOCKER_USERNAME% -p %DOCKER_PASSWORD%'
                         }
+                        bat "docker build -t klefurusach/tingeso-pep1 ."
+                        bat "docker push klefurusach/tingeso-pep1"
+                        bat "docker logout"
                     }
                 }
             }
